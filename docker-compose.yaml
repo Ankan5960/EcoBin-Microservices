@@ -1,15 +1,14 @@
 services:
-
   ecobin-sensor-data-service:
     container_name: ecobin_sensor_data_service
     build:
       context: ./EcoBin-Sensor-Data-Service
       dockerfile: Dockerfile
     ports:
-      - "5028:5028"
+      - "6028:6028"
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: "http://0.0.0.0:5028"
+      ASPNETCORE_URLS: "http://0.0.0.0:6028"
       ConnectionStrings__DefaultConnection: "Host=ecobin-sensor-data-db;Port=5432;Database=ecobin_sensor_data_db_production;Username=myuser;Password=mypassword"
     depends_on:
       - ecobin-sensor-data-db
@@ -27,7 +26,7 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - ecobin_sensor_data_service:/var/lib/postgresql/data
+      - ecobin_sensor_data:/var/lib/postgresql/data
     restart: always
     networks:
       - ecobin-network
@@ -38,17 +37,17 @@ services:
       context: ./EcoBin-User-Data-Service
       dockerfile: Dockerfile
     ports:
-      - "5274:5274"
+      - "6274:6274"
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: "http://0.0.0.0:5274"
+      ASPNETCORE_URLS: "http://0.0.0.0:6274"
+      EcoBinSensorDataApi__BaseUrl: "http://ecobin-sensor-data-service:6028"
     restart: always
     networks:
       - ecobin-network
 
 volumes:
-  ecobin_sensor_data_service:
-  ecobin_user_data_service:
+  ecobin_sensor_data:
 
 networks:
   ecobin-network:
