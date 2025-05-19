@@ -2,6 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: Function to update the repository
+call :update_repo "EcoBin-Auth-Service"
 call :update_repo "EcoBin-Sensor-Data-Service"
 call :update_repo "EcoBin-User-Data-Service"
 
