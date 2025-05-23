@@ -1,4 +1,21 @@
 services:
+  ecobin-gateway-service:
+    container_name: ecobin-gateway-service
+    build:
+      context: ./EcoBin-GateWay-Service
+      dockerfile: Dockerfile
+    ports:
+      - "6010:6010"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: "http://0.0.0.0:6010"
+      ApiBaseUrls__EcoBinAuthService: "http://ecobin-auth-service:6117"
+      ApiBaseUrls__EcoBinSensorDataService: "http://ecobin-sensor-data-service:6028"
+      ApiBaseUrls__EcoBinUserDataService: "http://ecobin-user-data-service:6274"
+    restart: always
+    networks:
+      - ecobin-network
+
   ecobin-auth-service:
     container_name: ecobin_auth_service
     build:

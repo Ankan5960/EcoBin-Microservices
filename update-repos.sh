@@ -15,6 +15,7 @@ update_repo() {
 # Check for the OS (Linux or macOS)
 if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
   # Update both repositories
+  update_repo "EcoBin-GateWay-Service"
   update_repo "EcoBin-Auth-Service"
   update_repo "EcoBin-Sensor-Data-Service"
   update_repo "EcoBin-User-Data-Service"

@@ -2,6 +2,9 @@
 
 # Function to run the commands for cloning the repositories
 clone_repos() {
+    echo Cloning EcoBin-GateWay-Service repository...
+    git clone https://github.com/Ankan5960/EcoBin-GateWay-Service.git
+
     echo "Cloning EcoBin-Auth-Service repository..."
     git clone https://github.com/Ankan5960/EcoBin-Auth-Service.git
 
